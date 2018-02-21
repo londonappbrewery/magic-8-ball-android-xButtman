@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
+    public int temp = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +31,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Random rand = new Random();
-                int randomNumber = rand.nextInt(4);
-
+                int randomNumber = temp;
+                if(temp == -1) {
+                    randomNumber = rand.nextInt(4);
+                }else{
+                    while(temp == randomNumber){
+                        randomNumber = rand.nextInt(4);
+                    }
+                }
+                temp=randomNumber;
                 ballDisplay.setImageResource(ballImage[randomNumber]);
+
             }
         });
 
